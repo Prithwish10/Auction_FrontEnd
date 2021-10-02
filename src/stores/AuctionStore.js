@@ -21,7 +21,8 @@ class AuctionStore {
         }
       });
 
-      this.auctions = result.data;
+      this.auctions = result.data.auctions;
+      console.log("Length ====>", result.data.auctions.length);
     } catch (error) {
       alert('Could not fetch auctions! Check console for more details.');
       console.error(error);
@@ -88,8 +89,9 @@ class AuctionStore {
       });
       
       const auction = createAuctionResult.data;
-      auctionId = auction.id;
-      
+      console.log("Create Auction ===>",auction.auction);
+      auctionId = auction.auction.id;
+      console.log("AUCTION ID ===>",auctionId);
       await axios.patch(`/auction/${auctionId}/picture`, pictureBase64, {
         headers: {
           Authorization: AuthStore.token,
